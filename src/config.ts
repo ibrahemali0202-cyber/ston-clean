@@ -4,6 +4,15 @@
  * Central configuration file for Ali Ibrahim - Sandblasting landing page.
  */
 
+import heroBlastingImg from "./assets/images/hero_blasting_1784727194703.jpg";
+import gateRustBeforeImg from "./assets/images/gate_rust_before_1784727208307.jpg";
+import gateCleanAfterImg from "./assets/images/gate_clean_after_1784727220171.jpg";
+import rimRustBeforeImg from "./assets/images/rim_rust_before_1784727233649.jpg";
+import rimCleanAfterImg from "./assets/images/rim_clean_after_1784727246619.jpg";
+import wallDirtyBeforeImg from "./assets/images/wall_dirty_before_1784727257776.jpg";
+import wallCleanAfterImg from "./assets/images/wall_clean_after_1784727269390.jpg";
+import blastingOperatorImg from "./assets/images/blasting_operator_1784727283366.jpg";
+
 export const BUSINESS_CONFIG = {
   // השם המלא של העסק
   businessName: "עלי איבראהים",
@@ -20,14 +29,14 @@ export const BUSINESS_CONFIG = {
   
   // נתיבי התמונות של העסק
   images: {
-    hero: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1600",
-    gateBefore: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800",
-    gateAfter: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800",
-    rimBefore: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=800",
-    rimAfter: "https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=800",
-    wallBefore: "https://images.unsplash.com/photo-1590059301037-3f309a4d8c7c?auto=format&fit=crop&q=80&w=800",
-    wallAfter: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
-    action: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800",
+    hero: heroBlastingImg,
+    gateBefore: gateRustBeforeImg,
+    gateAfter: gateCleanAfterImg,
+    rimBefore: rimRustBeforeImg,
+    rimAfter: rimCleanAfterImg,
+    wallBefore: wallDirtyBeforeImg,
+    wallAfter: wallCleanAfterImg,
+    action: blastingOperatorImg,
   }
 };
 

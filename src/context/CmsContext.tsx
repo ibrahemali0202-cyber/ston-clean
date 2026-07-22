@@ -26,15 +26,55 @@ const ADMIN_PASS_KEY = "ali_ibrahim_admin_pass";
 
 export const DEFAULT_ADMIN_PIN = "1234";
 
-// Helper to sanitize saved image paths (replaces legacy /images/ local paths with CDN defaults)
+// Helper to sanitize saved state and ensure all images use sandblasting assets
 function sanitizeImages(imagesObj: Record<string, string>): Record<string, string> {
   const result: Record<string, string> = { ...BUSINESS_CONFIG.images, ...(imagesObj || {}) };
   for (const key in result) {
-    if (!result[key] || result[key].startsWith("/images/")) {
+    if (!result[key] || result[key].startsWith("/images/") || result[key].includes("images.unsplash.com")) {
       result[key] = (BUSINESS_CONFIG.images as any)[key] || result[key];
     }
   }
   return result;
+}
+
+function sanitizeState(parsedData: any): CmsData {
+  if (!parsedData) return INITIAL_CMS_DATA;
+  
+  const sanitizedConfig = {
+    ...INITIAL_CMS_DATA.config,
+    ...(parsedData.config || {}),
+    images: sanitizeImages(parsedData.config?.images)
+  };
+
+  const galleryItems = (parsedData.galleryItems || INITIAL_CMS_DATA.galleryItems).map((item: GalleryItem) => {
+    if (!item.image || item.image.includes("unsplash.com") || item.image.startsWith("/images/")) {
+      const matchedDefault = GALLERY_DATA.find((g) => g.id === item.id);
+      return { ...item, image: matchedDefault ? matchedDefault.image : sanitizedConfig.images.action };
+    }
+    return item;
+  });
+
+  const beforeAfterItems = (parsedData.beforeAfterItems || INITIAL_CMS_DATA.beforeAfterItems).map((item: BeforeAfterItem) => {
+    let beforeImg = item.beforeImage;
+    let afterImg = item.afterImage;
+    if (!beforeImg || beforeImg.includes("unsplash.com") || beforeImg.startsWith("/images/")) {
+      const matchedDefault = BEFORE_AFTER_DATA.find((b) => b.id === item.id);
+      beforeImg = matchedDefault ? matchedDefault.beforeImage : sanitizedConfig.images.gateBefore;
+    }
+    if (!afterImg || afterImg.includes("unsplash.com") || afterImg.startsWith("/images/")) {
+      const matchedDefault = BEFORE_AFTER_DATA.find((b) => b.id === item.id);
+      afterImg = matchedDefault ? matchedDefault.afterImage : sanitizedConfig.images.gateAfter;
+    }
+    return { ...item, beforeImage: beforeImg, afterImage: afterImg };
+  });
+
+  return {
+    ...INITIAL_CMS_DATA,
+    ...parsedData,
+    config: sanitizedConfig,
+    galleryItems,
+    beforeAfterItems
+  };
 }
 
 const INITIAL_LEADS: CustomerLead[] = [
@@ -125,15 +165,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return {
-          ...INITIAL_CMS_DATA,
-          ...parsed,
-          config: {
-            ...INITIAL_CMS_DATA.config,
-            ...(parsed.config || {}),
-            images: sanitizeImages(parsed.config?.images)
-          }
-        };
+        return sanitizeState(parsed);
       }
     } catch (e) {
       console.error("Failed to load CMS data from localStorage", e);
@@ -152,15 +184,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     async function loadFromDb() {
       const dbData = await loadCmsDataFromDb();
       if (dbData) {
-        setData((prev) => ({
-          ...prev,
-          ...dbData,
-          config: {
-            ...prev.config,
-            ...(dbData.config || {}),
-            images: sanitizeImages(dbData.config?.images)
-          }
-        }));
+        setData(sanitizeState(dbData));
       }
     }
     loadFromDb();
