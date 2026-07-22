@@ -114,19 +114,11 @@ export const BEFORE_AFTER_DATA: BeforeAfterItem[] = [
     description: "ניקוי חלקים מכניים וחלקי רכב מפיח, שמן שרוף, לכלוך קשה וחלודה קלה לפני צביעה בתנור."
   },
   {
-    id: "ba-iron",
-    title: "צינור ברזל תעשייתי",
-    category: "חלודה",
-    beforeImage: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&q=80&w=800", // Rusted pipes
-    afterImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800", // Metallic pipe / industrial
-    description: "הסרת שכבת קורוזיה קשה מצינור קונסטרוקציה תעשייתי לקראת טיפול מונע חלודה."
-  },
-  {
     id: "ba-wall",
     title: "קיר אבן ובטון ישן",
     category: "אבן ובטון",
-    beforeImage: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&q=80&w=800", // Dark dirty concrete
-    afterImage: "https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=800", // Clean structured concrete
+    beforeImage: BUSINESS_CONFIG.images.wallBefore,
+    afterImage: BUSINESS_CONFIG.images.wallAfter,
     description: "ניקוי והסרת פיח, כתמי מים ולכלוך שהצטבר לאורך שנים על גבי קיר חיצוני מאבן טבעית."
   }
 ];
@@ -135,9 +127,9 @@ export const GALLERY_DATA: GalleryItem[] = [
   {
     id: "g1",
     category: "מתכת",
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=600",
-    title: "ניקוי קונסטרוקציית ברזל",
-    description: "חשיפת ברזל נקי ללא חלודה לפני יישום צבע יסוד."
+    image: BUSINESS_CONFIG.images.action,
+    title: "עבודת התזת חול מקצועית",
+    description: "עובד מוסמך עם ציוד מגן מלא ומתיז חול בלחץ גבוה על מבנה פלדה."
   },
   {
     id: "g2",
@@ -149,51 +141,44 @@ export const GALLERY_DATA: GalleryItem[] = [
   {
     id: "g3",
     category: "צבע ישן",
-    image: "https://images.unsplash.com/photo-1525498128493-380d1990a112?auto=format&fit=crop&q=80&w=600",
-    title: "קילוף צבע ישן ממשטח",
-    description: "הסרת שכבות צבע ישן לקראת צביעה חדשה וחלקה."
+    image: BUSINESS_CONFIG.images.gateAfter,
+    title: "שער מתכת נקי לחלוטין",
+    description: "חשיפת מתכת חלקית ונקייה מחלודה וצבע ישן."
   },
   {
     id: "g4",
     category: "אבן ובטון",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600",
-    title: "ניקוי גרנוליט ואבן",
-    description: "חידוש מראה שבילים וחומות אבן בלחץ אוויר וחול."
+    image: BUSINESS_CONFIG.images.wallBefore,
+    title: "קיר אבן לפני ניקוי",
+    description: "הצטברות פיח, לכלוך קשה וגרפיטי על גבי תשתיות אבן."
   },
   {
     id: "g5",
-    category: "ציוד וחלקים",
-    image: BUSINESS_CONFIG.images.rimAfter,
-    title: "ניקוי ג'אנטים וחלקי רכב",
-    description: "הסרת שאריות צבע וחלודה מג'אנט ברזל לקבלת מראה נקי."
+    category: "אבן ובטון",
+    image: BUSINESS_CONFIG.images.wallAfter,
+    title: "חידוש קיר אבן ובטון",
+    description: "תוצאת ניקוי בהתזה המחזירה את הגוון המקורי של האבן."
   },
   {
     id: "g6",
-    category: "הכנה לצביעה",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600",
-    title: "משטח מתכת מוכן לחלוטין",
-    description: "רמת החספוס והניקיון המבוקשת לצביעת מגן איכותית."
-  },
-  {
-    id: "g7",
-    category: "מתכת",
-    image: BUSINESS_CONFIG.images.gateAfter,
-    title: "שער ברזל נקי מחלודה",
-    description: "התוצאה לאחר התזת חול אחידה ויסודית."
-  },
-  {
-    id: "g8",
     category: "ציוד וחלקים",
     image: BUSINESS_CONFIG.images.rimBefore,
     title: "ג'אנט רכב ישן לפני טיפול",
     description: "חלודה מפוזרת ופיח קשה על גבי החלק המכני."
   },
   {
-    id: "g9",
-    category: "אבן ובטון",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=600",
-    title: "הסרת סימוני צבע מבטון",
-    description: "ניקוי פני שטח מבטון מזוהם בצבעים וחומרים תעשייתיים."
+    id: "g7",
+    category: "ציוד וחלקים",
+    image: BUSINESS_CONFIG.images.rimAfter,
+    title: "ניקוי ג'אנטים וחלקי רכב",
+    description: "הסרת שאריות צבע וחלודה מג'אנט ברזל לקבלת מראה נקי."
+  },
+  {
+    id: "g8",
+    category: "הכנה לצביעה",
+    image: BUSINESS_CONFIG.images.hero,
+    title: "משטח מתכת תעשייתי בזמן עבודה",
+    description: "רמת החספוס והניקיון המבוקשת לצביעת מגן איכותית."
   }
 ];
 

@@ -21,11 +21,14 @@ export const BUSINESS_CONFIG = {
   // נתיבי התמונות שנוצרו עבור האתר
   // ניתן להחליף תמונות אלו בקלות על ידי החלפת הקבצים בתיקיית src/assets/images/ או עדכון הקישורים להלן
   images: {
-    hero: "/src/assets/images/sandblasting_hero_1784621489371.jpg",
-    gateBefore: "/src/assets/images/rusted_metal_gate_1784621502298.jpg",
-    gateAfter: "/src/assets/images/cleaned_metal_gate_1784621517093.jpg",
-    rimBefore: "/src/assets/images/rusted_car_rim_1784621529873.jpg",
-    rimAfter: "/src/assets/images/cleaned_car_rim_1784621543184.jpg",
+    hero: "/src/assets/images/hero_sandblast_1784718782110.jpg",
+    gateBefore: "/src/assets/images/gate_before_1784718799086.jpg",
+    gateAfter: "/src/assets/images/gate_after_1784718814445.jpg",
+    rimBefore: "/src/assets/images/rim_before_1784718828355.jpg",
+    rimAfter: "/src/assets/images/rim_after_1784718843401.jpg",
+    wallBefore: "/src/assets/images/wall_before_1784718856517.jpg",
+    wallAfter: "/src/assets/images/wall_after_1784718870325.jpg",
+    action: "/src/assets/images/sandblast_action_1784718883060.jpg",
   }
 };
 
