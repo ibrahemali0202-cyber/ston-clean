@@ -99,6 +99,10 @@ export default function About() {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                   id="about-image"
+                  onError={(e) => {
+                    // Fallback if local image or base64 fails to load
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+                  }}
                 />
                 {/* Subtle Vignette Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/10 via-transparent to-transparent pointer-events-none" />

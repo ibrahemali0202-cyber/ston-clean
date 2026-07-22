@@ -37,6 +37,9 @@ function BeforeAfterCard({ item }: { item: BeforeAfterItem; key?: string }) {
           className="absolute inset-0 w-full h-full object-cover"
           referrerPolicy="no-referrer"
           id={`ba-img-after-${item.id}`}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+          }}
         />
         
         {/* תווית "אחרי" */}
@@ -56,6 +59,9 @@ function BeforeAfterCard({ item }: { item: BeforeAfterItem; key?: string }) {
             className="absolute inset-0 w-full h-full object-cover"
             referrerPolicy="no-referrer"
             id={`ba-img-before-${item.id}`}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+            }}
           />
         </div>
         

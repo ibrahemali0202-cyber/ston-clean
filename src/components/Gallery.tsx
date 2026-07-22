@@ -92,6 +92,9 @@ export default function Gallery() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                     id={`gallery-img-${item.id}`}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+                    }}
                   />
                   
                   {/* Hover Overlay with Zoom Icon */}
@@ -159,6 +162,9 @@ export default function Gallery() {
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                   id="lightbox-img"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+                  }}
                 />
               </div>
 
