@@ -18,17 +18,16 @@ export const BUSINESS_CONFIG = {
   // הודעת ברירת מחדל לפניות כלליות מהאתר
   defaultMessage: "שלום עלי, הגעתי דרך האתר ואני מעוניין/ת לקבל הצעת מחיר לעבודת ניקוי חול. אשמח למסור פרטים נוספים.",
   
-  // נתיבי התמונות שנוצרו עבור האתר
-  // ניתן להחליף תמונות אלו בקלות על ידי החלפת הקבצים בתיקיית src/assets/images/ או עדכון הקישורים להלן
+  // נתיבי התמונות של העסק
   images: {
-    hero: "/images/hero_sandblast_1784718782110.jpg",
-    gateBefore: "/images/gate_before_1784718799086.jpg",
-    gateAfter: "/images/gate_after_1784718814445.jpg",
-    rimBefore: "/images/rim_before_1784718828355.jpg",
-    rimAfter: "/images/rim_after_1784718843401.jpg",
-    wallBefore: "/images/wall_before_1784718856517.jpg",
-    wallAfter: "/images/wall_after_1784718870325.jpg",
-    action: "/images/sandblast_action_1784718883060.jpg",
+    hero: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1600",
+    gateBefore: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800",
+    gateAfter: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800",
+    rimBefore: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=800",
+    rimAfter: "https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=800",
+    wallBefore: "https://images.unsplash.com/photo-1590059301037-3f309a4d8c7c?auto=format&fit=crop&q=80&w=800",
+    wallAfter: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+    action: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800",
   }
 };
 

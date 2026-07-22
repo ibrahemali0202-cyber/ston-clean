@@ -38,7 +38,12 @@ function BeforeAfterCard({ item }: { item: BeforeAfterItem; key?: string }) {
           referrerPolicy="no-referrer"
           id={`ba-img-after-${item.id}`}
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+            const fallbacks: Record<string, string> = {
+              "ba-gate": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800",
+              "ba-rim": "https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=800",
+              "ba-wall": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800"
+            };
+            (e.target as HTMLImageElement).src = fallbacks[item.id] || "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800";
           }}
         />
         
@@ -60,7 +65,12 @@ function BeforeAfterCard({ item }: { item: BeforeAfterItem; key?: string }) {
             referrerPolicy="no-referrer"
             id={`ba-img-before-${item.id}`}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+              const fallbacks: Record<string, string> = {
+                "ba-gate": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800",
+                "ba-rim": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=800",
+                "ba-wall": "https://images.unsplash.com/photo-1590059301037-3f309a4d8c7c?auto=format&fit=crop&q=80&w=800"
+              };
+              (e.target as HTMLImageElement).src = fallbacks[item.id] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800";
             }}
           />
         </div>

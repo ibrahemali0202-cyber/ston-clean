@@ -21,10 +21,21 @@ import {
 } from "../data";
 import { saveCmsDataToDb, loadCmsDataFromDb } from "../utils/dbStorage";
 
-const STORAGE_KEY = "ali_ibrahim_sandblast_cms_v2";
+const STORAGE_KEY = "ali_ibrahim_sandblast_cms_v3";
 const ADMIN_PASS_KEY = "ali_ibrahim_admin_pass";
 
 export const DEFAULT_ADMIN_PIN = "1234";
+
+// Helper to sanitize saved image paths (replaces legacy /images/ local paths with CDN defaults)
+function sanitizeImages(imagesObj: Record<string, string>): Record<string, string> {
+  const result: Record<string, string> = { ...BUSINESS_CONFIG.images, ...(imagesObj || {}) };
+  for (const key in result) {
+    if (!result[key] || result[key].startsWith("/images/")) {
+      result[key] = (BUSINESS_CONFIG.images as any)[key] || result[key];
+    }
+  }
+  return result;
+}
 
 const INITIAL_LEADS: CustomerLead[] = [
   {
@@ -120,10 +131,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           config: {
             ...INITIAL_CMS_DATA.config,
             ...(parsed.config || {}),
-            images: {
-              ...INITIAL_CMS_DATA.config.images,
-              ...(parsed.config?.images || {})
-            }
+            images: sanitizeImages(parsed.config?.images)
           }
         };
       }
@@ -150,10 +158,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           config: {
             ...prev.config,
             ...(dbData.config || {}),
-            images: {
-              ...prev.config.images,
-              ...(dbData.config?.images || {})
-            }
+            images: sanitizeImages(dbData.config?.images)
           }
         }));
       }

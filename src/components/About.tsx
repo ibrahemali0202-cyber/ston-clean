@@ -100,8 +100,8 @@ export default function About() {
                   referrerPolicy="no-referrer"
                   id="about-image"
                   onError={(e) => {
-                    // Fallback if local image or base64 fails to load
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800";
+                    // Fallback if image fails to load
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800";
                   }}
                 />
                 {/* Subtle Vignette Overlay */}
