@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BUSINESS_CONFIG } from "../config";
+import { useCms } from "../context/CmsContext";
 import { Send, AlertTriangle, Check } from "lucide-react";
-import { SERVICES_DATA } from "../data";
 
 export default function LeadForm() {
+  const { data, addLead } = useCms();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [serviceType, setServiceType] = useState("");
@@ -30,9 +30,18 @@ export default function LeadForm() {
     setErrors({});
     setSubmitted(true);
 
+    // Save lead in CMS state
+    addLead({
+      name: name.trim(),
+      phone: "נשלח בוואטסאפ",
+      location: location.trim(),
+      serviceType,
+      notes: description.trim()
+    });
+
     // בניית ההודעה לוואטסאפ בהתאם לפורמט הנדרש
     const message = 
-`שלום עלי, הגעתי דרך האתר.
+`שלום ${data.config.businessName}, הגעתי דרך האתר.
 
 שם: ${name.trim()}
 אזור העבודה: ${location.trim()}
@@ -43,7 +52,8 @@ export default function LeadForm() {
 
     // ביצוע URL encoding תקין לכל תוכן ההודעה
     const encodedText = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${BUSINESS_CONFIG.whatsappPhone}?text=${encodedText}`;
+    const cleanPhone = data.config.whatsappPhone.replace(/[^0-9]/g, "");
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedText}`;
 
     // פתיחת וואטסאפ בחלון חדש
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
@@ -83,7 +93,7 @@ export default function LeadForm() {
               <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center shrink-0 text-emerald-600">
                 <Check className="w-4 h-4" />
               </div>
-              <p>הפרטים נקלטו! כעת נפתח חלון WhatsApp עם ההודעה המוכנה עבור עלי. לחצו לשליחה במידה ולא נפתח אוטומטית.</p>
+              <p>הפרטים נקלטו במערכת! כעת נפתח חלון WhatsApp עם ההודעה המוכנה. לחצו לשליחה במידה ולא נפתח אוטומטית.</p>
             </div>
           )}
 
@@ -164,7 +174,7 @@ export default function LeadForm() {
                 style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2327272a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left 15px center', backgroundSize: '16px' }}
               >
                 <option value="" className="text-zinc-400">--- אנא בחרו שירות ---</option>
-                {SERVICES_DATA.map((srv) => (
+                {data.services?.map((srv) => (
                   <option key={srv.id} value={srv.title} className="text-zinc-900 bg-white">
                     {srv.title}
                   </option>
@@ -224,3 +234,4 @@ export default function LeadForm() {
     </section>
   );
 }
+

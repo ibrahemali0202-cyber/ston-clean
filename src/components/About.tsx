@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
-import { BUSINESS_CONFIG, getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 
 export default function About() {
+  const { data, getWhatsAppLink } = useCms();
   const whatsAppLink = getWhatsAppLink(
-    "שלום עלי, הגעתי דרך האתר ואשמח להתייעץ איתך לגבי עבודת ניקוי חול."
+    `שלום ${data.config.businessName}, הגעתי דרך האתר ואשמח להתייעץ איתך לגבי עבודת ניקוי חול.`
   );
 
   return (
@@ -31,7 +32,7 @@ export default function About() {
               </div>
               
               <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 tracking-tight" id="about-title">
-                נעים להכיר, עלי איבראהים
+                נעים להכיר, {data.config.businessName}
               </h2>
               
               <div className="h-1 w-20 bg-orange-600 rounded" id="about-divider" />
@@ -46,7 +47,7 @@ export default function About() {
               id="about-body-text"
             >
               <p>
-                עלי איבראהים מספק שירותי ניקוי חול והתזה למגוון רחב של משטחים ועבודות. כל פרויקט נבדק בהתאם לסוג המשטח, שכבת הצבע, החלודה או הלכלוך שיש להסיר.
+                {data.config.businessName} מספק שירותי ניקוי חול והתזה למגוון רחב של משטחים ועבודות. כל פרויקט נבדק בהתאם לסוג המשטח, שכבת הצבע, החלודה או הלכלוך שיש להסיר.
               </p>
               <p className="font-normal text-zinc-800">
                 המטרה היא להגיע לתוצאה נקייה ואחידה ולהכין את המשטח בצורה טובה להמשך טיפול, שיקום או צביעה.
@@ -93,9 +94,9 @@ export default function About() {
               {/* Image Container */}
               <div className="relative overflow-hidden rounded-xl bg-zinc-100 aspect-[4/3] sm:aspect-square shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800"
-                  alt="עבודות ניקוי חול בהתזה בבתי מלאכה"
-                  className="w-full h-full object-cover grayscale brightness-95 contrast-105 hover:scale-105 transition-transform duration-500"
+                  src={data.config.images.action}
+                  alt="עבודות ניקוי חול בהתזה"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                   id="about-image"
                 />
@@ -125,3 +126,4 @@ export default function About() {
     </section>
   );
 }
+

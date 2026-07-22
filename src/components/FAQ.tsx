@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FAQ_DATA } from "../data";
+import { useCms } from "../context/CmsContext";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 
 export default function FAQ() {
+  const { data } = useCms();
   const [openId, setOpenId] = useState<string | null>(null);
 
   const toggleFAQ = (id: string) => {
@@ -28,7 +29,7 @@ export default function FAQ() {
 
         {/* Accordion Wrapper */}
         <div className="space-y-4" id="faq-accordion-wrapper">
-          {FAQ_DATA.map((faq) => {
+          {data.faqItems?.map((faq) => {
             const isOpen = openId === faq.id;
             return (
               <div
@@ -82,3 +83,4 @@ export default function FAQ() {
     </section>
   );
 }
+

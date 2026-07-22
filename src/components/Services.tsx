@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { SERVICES_DATA } from "../data";
-import { getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 import { 
   ShieldAlert, 
   Paintbrush, 
@@ -17,7 +16,7 @@ import {
 const iconMap: Record<string, React.ComponentType<any>> = {
   ShieldAlert: ShieldAlert,
   Paintbrush: Paintbrush,
-  Brick: Layers, // שימוש ב-Layers כחלופה מעוצבת לאבן ובטון
+  Brick: Layers,
   Trash2: Trash2,
   Car: Car,
   Sparkles: Sparkles,
@@ -25,6 +24,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 };
 
 export default function Services() {
+  const { data, getWhatsAppLink } = useCms();
+
   return (
     <section id="services" className="py-24 bg-stone-50 border-t border-zinc-200/80 relative">
       {/* Visual Accent */}
@@ -46,11 +47,11 @@ export default function Services() {
 
         {/* Services Bento/Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
-          {SERVICES_DATA.map((service, index) => {
+          {data.services?.map((service, index) => {
             const IconComponent = iconMap[service.iconName] || Sparkles;
             
             // יצירת הודעת וואטסאפ ייעודית לכל שירות
-            const serviceWhatsAppMessage = `שלום עלי, הגעתי דרך האתר ואשמח לקבל הצעת מחיר לגבי השירות של: ${service.title}.`;
+            const serviceWhatsAppMessage = `שלום ${data.config.businessName}, הגעתי דרך האתר ואשמח לקבל הצעת מחיר לגבי השירות של: ${service.title}.`;
             const whatsAppLink = getWhatsAppLink(serviceWhatsAppMessage);
 
             return (
@@ -107,3 +108,4 @@ export default function Services() {
     </section>
   );
 }
+

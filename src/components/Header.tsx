@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { BUSINESS_CONFIG, getWhatsAppLink } from "../config";
+import { Menu, X, Settings } from "lucide-react";
+import { useCms } from "../context/CmsContext";
 
 interface HeaderProps {
   activeSection: string;
 }
 
 export default function Header({ activeSection }: HeaderProps) {
+  const { data, openAdmin, getWhatsAppLink } = useCms();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -64,10 +65,10 @@ export default function Header({ activeSection }: HeaderProps) {
             id="logo-container"
           >
             <span className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-1">
-              <span className="text-white">{BUSINESS_CONFIG.businessName}</span>
+              <span className="text-white">{data.config.businessName}</span>
             </span>
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-orange-400">
-              {BUSINESS_CONFIG.businessSubTitle}
+              {data.config.businessSubTitle}
             </span>
           </div>
 
@@ -90,8 +91,17 @@ export default function Header({ activeSection }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Call-to-action button (Left) */}
-          <div className="hidden md:block" id="cta-header-container">
+          {/* Action Area: WhatsApp CTA + Admin Button */}
+          <div className="hidden md:flex items-center gap-3" id="cta-header-container">
+            <button
+              onClick={openAdmin}
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700/80 text-zinc-300 hover:text-white rounded-full text-xs font-bold transition duration-200"
+              title="כניסה למערכת ניהול תוכן ותמונות"
+            >
+              <Settings className="w-3.5 h-3.5 text-orange-400" />
+              <span>ניהול אתר</span>
+            </button>
+
             <a
               href={whatsAppLink}
               target="_blank"
@@ -104,8 +114,15 @@ export default function Header({ activeSection }: HeaderProps) {
             </a>
           </div>
 
-          {/* Mobile hamburger menu button */}
-          <div className="flex lg:hidden" id="mobile-menu-btn-container">
+          {/* Mobile menu and admin trigger */}
+          <div className="flex items-center gap-2 lg:hidden" id="mobile-menu-btn-container">
+            <button
+              onClick={openAdmin}
+              className="p-2 rounded-md text-orange-400 hover:bg-zinc-800"
+              title="ניהול אתר"
+            >
+              <Settings className="h-5 w-5" />
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
@@ -139,7 +156,17 @@ export default function Header({ activeSection }: HeaderProps) {
                 {item.label}
               </button>
             ))}
-            <div className="pt-4 pb-2 px-3">
+            <div className="pt-4 pb-2 px-3 space-y-2">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  openAdmin();
+                }}
+                className="flex w-full items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-orange-400 font-bold py-2.5 px-4 rounded-full text-center transition-all text-sm border border-zinc-700"
+              >
+                <Settings className="w-4 h-4" />
+                <span>ניהול תוכן ותמונות האתר</span>
+              </button>
               <a
                 href={whatsAppLink}
                 target="_blank"
@@ -157,3 +184,4 @@ export default function Header({ activeSection }: HeaderProps) {
     </header>
   );
 }
+

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { GALLERY_DATA } from "../data";
+import { useCms } from "../context/CmsContext";
 import { X, ZoomIn } from "lucide-react";
 
 export default function Gallery() {
+  const { data } = useCms();
   const [selectedCategory, setSelectedCategory] = useState("הכל");
   const [lightboxImage, setLightboxImage] = useState<{
     image: string;
@@ -22,9 +23,10 @@ export default function Gallery() {
   ];
 
   // סינון התמונות לפי קטגוריה נבחרת
+  const galleryList = data.galleryItems || [];
   const filteredItems = selectedCategory === "הכל"
-    ? GALLERY_DATA
-    : GALLERY_DATA.filter(item => item.category === selectedCategory);
+    ? galleryList
+    : galleryList.filter(item => item.category === selectedCategory);
 
   return (
     <section id="gallery" className="py-24 bg-stone-50 border-t border-zinc-200/80 relative">
@@ -117,11 +119,6 @@ export default function Gallery() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Disclaimer note */}
-        <div className="text-center text-zinc-400 text-xs sm:text-sm mt-12 font-light">
-          • תמונות המחשה בלבד – ניתן להחליף אותן בקלות בתיקיית התמונות של הפרויקט.
-        </div>
-
       </div>
 
       {/* Lightbox / Fullscreen Modal Overlay */}
@@ -173,9 +170,6 @@ export default function Gallery() {
                 <p className="text-zinc-650 text-xs sm:text-sm font-light">
                   {lightboxImage.description}
                 </p>
-                <div className="text-zinc-400 text-[10px] mt-3">
-                  תמונת להמחשה בלבד
-                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -184,3 +178,4 @@ export default function Gallery() {
     </section>
   );
 }
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BEFORE_AFTER_DATA } from "../data";
+import { useCms } from "../context/CmsContext";
 import { BeforeAfterItem } from "../types";
 
 /**
@@ -93,16 +93,13 @@ function BeforeAfterCard({ item }: { item: BeforeAfterItem; key?: string }) {
           </div>
         </div>
       </div>
-
-      {/* תו המחשה - התחייבות לשקיפות */}
-      <div className="text-center text-zinc-400 text-xs font-light" id={`ba-footnote-${item.id}`}>
-        תמונת המחשה – התמונות המקוריות יתווספו בהמשך
-      </div>
     </div>
   );
 }
 
 export default function BeforeAfter() {
+  const { data } = useCms();
+
   return (
     <section id="before-after" className="py-24 bg-zinc-100 border-t border-zinc-200/80 relative">
       {/* Decorative top border */}
@@ -124,7 +121,7 @@ export default function BeforeAfter() {
 
         {/* Slider Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8" id="before-after-grid">
-          {BEFORE_AFTER_DATA.map((item) => (
+          {data.beforeAfterItems?.map((item) => (
             <BeforeAfterCard key={item.id} item={item} />
           ))}
         </div>
@@ -133,3 +130,4 @@ export default function BeforeAfter() {
     </section>
   );
 }
+

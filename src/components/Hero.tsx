@@ -1,9 +1,10 @@
 import React from "react";
 import { motion } from "motion/react";
-import { BUSINESS_CONFIG, getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 import { ShieldCheck, Sliders, UserCheck } from "lucide-react";
 
 export default function Hero() {
+  const { data, getWhatsAppLink } = useCms();
   const whatsAppLink = getWhatsAppLink();
 
   const handleScrollToGallery = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,9 +35,9 @@ export default function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={BUSINESS_CONFIG.images.hero}
+          src={data.config.images.hero}
           alt="עובד מקצועי מבצע ניקוי חול בהתזה"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-all duration-500"
           referrerPolicy="no-referrer"
           id="hero-bg-img"
         />
@@ -53,7 +54,7 @@ export default function Hero() {
           {/* Subtitle Accent */}
           <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/25 px-4 py-1.5 rounded-full text-orange-400 text-xs sm:text-sm font-bold tracking-widest uppercase" id="hero-badge">
             <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-            עלי איבראהים — ניקוי חול בהתזה בפריסה ארצית
+            {data.config.businessName} — {data.config.businessSubTitle} בפריסה ארצית
           </div>
 
           {/* Main Title */}
@@ -116,3 +117,4 @@ export default function Hero() {
     </section>
   );
 }
+

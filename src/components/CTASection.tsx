@@ -1,9 +1,10 @@
-import { getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 import { Send } from "lucide-react";
 
 export default function CTASection() {
+  const { data, getWhatsAppLink } = useCms();
   const whatsAppLink = getWhatsAppLink(
-    "שלום עלי, אני מעוניין/ת לשלוח תמונות של המשטח שלי לקבלת הצעת מחיר לניקוי חול."
+    `שלום ${data.config.businessName}, אני מעוניין/ת לשלוח תמונות של המשטח שלי לקבלת הצעת מחיר לניקוי חול.`
   );
 
   return (
@@ -38,10 +39,11 @@ export default function CTASection() {
           </div>
           
           <p className="text-xs text-gray-500 font-light mt-4">
-            * המענה מהיר וישיר על ידי עלי איבראהים
+            * המענה מהיר וישיר על ידי {data.config.businessName}
           </p>
         </div>
       </div>
     </section>
   );
 }
+

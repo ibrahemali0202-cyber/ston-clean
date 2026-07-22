@@ -44,3 +44,44 @@ export interface FAQItem {
   question: string;
   answer: string;
 }
+
+export interface BusinessConfig {
+  businessName: string;
+  businessSubTitle: string;
+  whatsappPhone: string;
+  defaultMessage: string;
+  images: {
+    hero: string;
+    gateBefore: string;
+    gateAfter: string;
+    rimBefore: string;
+    rimAfter: string;
+    wallBefore: string;
+    wallAfter: string;
+    action: string;
+    [key: string]: string;
+  };
+}
+
+export interface CustomerLead {
+  id: string;
+  name: string;
+  phone: string;
+  location?: string;
+  serviceType: string;
+  notes: string;
+  date: string;
+  status: "חדש" | "בטיפול" | "נסגר" | "בוטל";
+}
+
+export interface CmsData {
+  config: BusinessConfig;
+  services: Service[];
+  benefits: Benefit[];
+  processSteps: ProcessStep[];
+  beforeAfterItems: BeforeAfterItem[];
+  galleryItems: GalleryItem[];
+  faqItems: FAQItem[];
+  leads: CustomerLead[];
+}
+

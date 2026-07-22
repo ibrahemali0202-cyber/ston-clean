@@ -1,6 +1,7 @@
-import { BUSINESS_CONFIG, getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 
 export default function Footer() {
+  const { data, getWhatsAppLink } = useCms();
   const whatsAppLink = getWhatsAppLink();
 
   const scrollToSection = (id: string) => {
@@ -25,8 +26,8 @@ export default function Footer() {
           
           {/* Brand Identity */}
           <div className="text-center md:text-right" id="footer-branding">
-            <h2 className="text-xl font-black text-white">{BUSINESS_CONFIG.businessName}</h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1">{BUSINESS_CONFIG.businessSubTitle}</p>
+            <h2 className="text-xl font-black text-white">{data.config.businessName}</h2>
+            <p className="text-xs sm:text-sm text-zinc-500 mt-1">{data.config.businessSubTitle}</p>
           </div>
 
           {/* Core Footer Navigation */}
@@ -80,7 +81,7 @@ export default function Footer() {
         {/* Bottom copyright */}
         <div className="pt-8 text-center text-xs text-zinc-600 flex flex-col sm:flex-row justify-between items-center gap-4" id="footer-bottom-row">
           <p id="copyright-text">
-            &copy; {new Date().getFullYear()} כל הזכויות שמורות לעלי איבראהים
+            &copy; {new Date().getFullYear()} כל הזכויות שמורות ל{data.config.businessName}
           </p>
           <p className="text-[10px] text-zinc-700" id="professional-built-foot">
             ניקוי חול מקצועי ואיכותי בהתאם לסוג המשטח
@@ -91,3 +92,4 @@ export default function Footer() {
     </footer>
   );
 }
+

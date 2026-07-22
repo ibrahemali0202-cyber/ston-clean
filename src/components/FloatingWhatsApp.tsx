@@ -1,6 +1,7 @@
-import { getWhatsAppLink } from "../config";
+import { useCms } from "../context/CmsContext";
 
 export default function FloatingWhatsApp() {
+  const { getWhatsAppLink } = useCms();
   const whatsAppLink = getWhatsAppLink();
 
   // וקטור לוגו וואטסאפ רשמי
@@ -60,3 +61,4 @@ export default function FloatingWhatsApp() {
     </div>
   );
 }
+
